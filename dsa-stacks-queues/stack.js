@@ -48,6 +48,8 @@ class Stack {
 
   /** peek(): return the value of the top node in the stack. */
   peek() {
+    if (this.isEmpty()) throw new Error;
+    
     return this.top.val;
   }
 
