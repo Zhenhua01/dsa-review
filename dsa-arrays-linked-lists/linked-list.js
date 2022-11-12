@@ -20,16 +20,18 @@ class LinkedList {
     for (let val of vals) this.push(val);
   }
 
-  /** push(val): add new value to end of list. Returns undefined.*/
+  /** push(val): add new value to end of list. Returns undefined. */
   push(val) {
     // create new node with Node class
     let newNode = new Node(val);
 
-    // if LL head is null, assign new node to head
-    if (this.head === null) this.head = newNode;
-
-    // if LL has a tail node, assign tail node's next to new node
-    if (this.tail !== null) this.tail.next = newNode;
+    // if LL has no head node, assign new node to head,
+    // else assign new node to tail
+    if (this.head === null) {
+      this.head = newNode;
+    } else {
+      this.tail.next = newNode;
+    }
 
     // assign new node to tail of LL
     this.tail = newNode;
@@ -37,16 +39,18 @@ class LinkedList {
     this.length++;
   }
 
-  /** unshift(val): add new value to start of list. Returns undefined.*/
+  /** unshift(val): add new value to start of list. Returns undefined. */
   unshift(val) {
     // create new node with Node class
     let newNode = new Node(val);
 
-    // if LL tail is null, assign new node to tail
-    if (this.tail === null) this.tail = newNode;
-
-    // assign new node's next to prev head node
-    newNode.next = this.head;
+    // if LL has no tail node, assign new node to tail,
+    // else assign new node to head
+    if (this.tail === null) {
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+    }
 
     // assign new Node to head of LL
     this.head = newNode;
@@ -69,6 +73,7 @@ class LinkedList {
       currNode = currNode.next;
     }
 
+    // if there's one node, assign head and tail to null
     if (this.length === 1) {
       this.head = null;
       this.tail = null;
@@ -90,6 +95,7 @@ class LinkedList {
     // remember head node to remove
     const removedNode = this.head;
 
+    // if there's one node, assign head and tail to null
     if (this.length === 1) {
       this.head = null;
       this.tail = null;
@@ -119,7 +125,7 @@ class LinkedList {
     return currNode.val;
   }
 
-  /** setAt(idx, val): set val at idx to val */
+  /** setAt(idx, val): set val at idx to val. */
   setAt(idx, val) {
     // throw error if index not valid
     if (idx < 0 || idx >= this.length) throw new Error;
@@ -165,7 +171,7 @@ class LinkedList {
     this.length++;
   }
 
-  /** removeAt(idx): return & remove item at idx, */
+  /** removeAt(idx): return & remove item at idx. */
   removeAt(idx) {
     // throw error if index not valid
     if (idx < 0 || idx >= this.length) throw new Error;
@@ -194,7 +200,7 @@ class LinkedList {
     return removedNode.val;
   }
 
-  /** average(): return an average of all values in the list */
+  /** average(): return an average of all values in the list. */
   average() {
     // returns 0 if empty LL
     if (this.length === 0) return 0;
@@ -210,8 +216,7 @@ class LinkedList {
     return (sum / this.length);
   }
 
-  /** reverseInPlace() reverse list in place. returns undefined */
-
+  /** reverseInPlace() reverse list in place. Returns undefined. */
   reverseInPlace() {
     // return if LL is empty or only has one node
     if (this.length < 2) return;
